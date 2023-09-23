@@ -1,4 +1,16 @@
+using ControleProdutosQ3Retomada.Data;
+using ControleProdutosQ3Retomada.Repository;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<BancoContext>(
+	o => o.UseSqlServer(
+			builder.Configuration.GetConnectionString("Database")
+		)
+	);
+
+builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
