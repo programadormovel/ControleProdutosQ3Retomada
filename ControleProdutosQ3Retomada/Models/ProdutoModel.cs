@@ -11,9 +11,8 @@ namespace ControleProdutosQ3Retomada.Models
         public int Id { get; set; }
 		
 		[Required(ErrorMessage ="Campo Obrigatório!")]
-		//[StringLength(12, MinimumLength=12, 
-		//	ErrorMessage ="Mínimo de 12 caracteres!")]
-		[RegularExpression(@"[0-9]")]
+		[StringLength(12, MinimumLength = 12, ErrorMessage = "Mínimo de 12 caracteres!")]
+		[RegularExpression(@"^[0-9]+$", ErrorMessage ="Este campo aceita apenas números.")]
 		public string CodigoDeBarras { get; set; }
 
 		//[RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
@@ -30,11 +29,11 @@ namespace ControleProdutosQ3Retomada.Models
 		public DateTime DataDeRegistro { get; set; }
 
 		[Range(1, 1000)]
-		public int? Quantidade { get; set; }
+		public int Quantidade { get; set; }
 
 		[DataType(DataType.Currency)]
 		[Column(TypeName = "decimal(18,2)")]
-		public decimal? Valor { get; set;}
+		public decimal Valor { get; set;}
 		
 		[MaybeNull]
 		public string? NomeDaFoto { get; set; }

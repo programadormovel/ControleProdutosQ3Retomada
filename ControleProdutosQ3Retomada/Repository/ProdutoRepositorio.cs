@@ -1,5 +1,6 @@
 ﻿using ControleProdutosQ3Retomada.Data;
 using ControleProdutosQ3Retomada.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ControleProdutosQ3Retomada.Repository
 {
@@ -12,15 +13,17 @@ namespace ControleProdutosQ3Retomada.Repository
 			_bancoContext = bancoContext;
 		}
 		
-		ProdutoModel IProdutoRepositorio.Adicionar(ProdutoModel produto)
+		public async Task<ProdutoModel> Adicionar(ProdutoModel produto)
 		{
-			_bancoContext.Produto.Add(produto);
-			throw new NotImplementedException();
+			await _bancoContext.Produto.AddAsync(produto);
+			await _bancoContext.SaveChangesAsync();
+
+			return produto;
 		}
 
-		List<ProdutoModel> IProdutoRepositorio.BuscarTodos()
+		public async Task<List<ProdutoModel>> BuscarTodos()
 		{
-			throw new NotImplementedException();
+			return await _bancoContext.Produto.ToListAsync();	
 		}
 	}
 }

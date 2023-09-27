@@ -4,6 +4,7 @@ using ControleProdutosQ3Retomada.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ControleProdutosQ3Retomada.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    partial class BancoContextModelSnapshot : ModelSnapshot
+    [Migration("20230926005541_ControleQ33")]
+    partial class ControleQ33
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
