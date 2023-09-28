@@ -1,15 +1,19 @@
 ﻿@model ProdutoModel
 @{
-    ViewData["Title"] = "Cadastro de Produtos";
+    ViewData["Title"] = "Editar de Produto";
+
+    var dataRecebida = Model.DataDeValidade.Date;
 }
 
 <div>
-    <form asp-controller="Produto" asp-action="Criar" enctype="multipart/form-data" method="post">
+    <form asp-controller="Produto" asp-action="Alterar" enctype="multipart/form-data" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
+
+        <input type="hidden" asp-for="Id" />
         <div>
             <label for="descricao" class="form-label">Descrição</label>
-            <input type="text" asp-for="Descricao" class="form-control" id="descricao" 
-                placeholder="Entre com a descrição do produto" >
+            <input type="text" asp-for="Descricao" class="form-control" id="descricao"
+                   placeholder="Entre com a descrição do produto">
             <span asp-validation-for="Descricao" class="text-danger"></span>
         </div>
         <div>
@@ -20,8 +24,9 @@
         </div>
         <div>
             <label for="dataDeValidade" class="form-label">Data de Validade</label>
-            <input type="date" asp-for="DataDeValidade" class="form-control" id="dataDeValidade"
-                   placeholder="Data de Validade">
+           
+            <input type="date" asp-for="@dataRecebida" class="form-control" id="dataDeValidade"
+                   placeholder="Data de Validade" name="dataAlterada">
             <span asp-validation-for="DataDeValidade" class="text-danger"></span>
         </div>
         <div>
@@ -37,9 +42,10 @@
             <span asp-validation-for="Valor" class="text-danger"></span>
         </div>
         <div>
-            <label for="nomeDaFoto" class="form-label">Imagem do Produto</label>
+            <label for="nomeDaFoto" class="form-label">Imagem do Produto: </label>
+            @Html.DisplayFor(model => model.NomeDaFoto)
             <input type="file" class="form-control" id="nomeDaFoto"
-                   placeholder="Busque a foto do produto" name="imagemCarregada">
+                   placeholder="Busque nova a foto do produto" name="imagemCarregada">
         </div>
 
         <div>

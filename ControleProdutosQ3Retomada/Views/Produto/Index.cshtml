@@ -2,6 +2,8 @@
 @model List<ProdutoModel>
 @{
     ViewData["Title"] = "Produtos";
+
+    var imgSrc = "https://img.freepik.com/fotos-gratis/imagem-aproximada-da-cabeca-de-um-lindo-leao_181624-35855.jpg?w=2000";
 }
 
 <div class="text-center">
@@ -25,6 +27,7 @@
                 <th scope="col">Quantidade</th>
                 <th scope="col">Valor Unitário</th>
                 <th scope="col">Situação</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +37,13 @@
                 foreach (ProdutoModel produto in Model)
                 {
                     <tr class="align-baseline">
-                        <td scope="col"><img src="https://img.freepik.com/fotos-gratis/imagem-aproximada-da-cabeca-de-um-lindo-leao_181624-35855.jpg?w=2000" width="50" height="50" /></td>
+
+                        @if(produto.Foto != null){
+                            var base64 = Convert.ToBase64String(@produto.Foto);
+                            imgSrc = $"data:image/gif;base64,{base64}";
+                        }
+
+                        <td scope="col"><img src='@imgSrc' width="50" height="50" /></td>
 
                         <th>@produto.Id</th>
                         <td>@produto.CodigoDeBarras</td>
@@ -44,6 +53,13 @@
                         <td>@produto.Quantidade</td>
                         <td>@produto.Valor.ToString("C2")</td>
                         <td>@produto.Ativo</td>
+                        <td>
+                            <div class="btn-group d-flex align-items-center justify-content-around" role="group">
+                                <a role="button" class="btn btn-primary mx-2" asp-controller="Produto" asp-action="Editar" asp-route-id="@produto.Id">Editar</a>
+                                <a role="button" class="btn btn-warning mx-2">Desativar</a>
+                                <a role="button" class="btn btn-danger mx-2 border-radius" asp-controller="Produto" asp-action="ApagarConfirmacao">Apagar</a>
+                            </div>
+                        </td>
                     </tr>
                 }
             }
